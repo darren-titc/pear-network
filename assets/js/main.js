@@ -61,15 +61,14 @@ window.addEventListener('scroll', () => {
     }
 });
 
-// Simple Modal for Zoho Form
 class ZohoFormModal {
     constructor() {
         this.formUrl = 'https://forms.zohopublic.com/talentinthecloud/form/PearWaitingList/formperma/xtmool5P4DRilibwvSXq6OMwLis9gIk1V9uOSW-QInI';
         this.initialize();
+        this.preloadForm();
     }
 
     initialize() {
-        // Create modal HTML
         const modalHTML = `
             <div class="modal-overlay" id="formModal">
                 <div class="modal-container">
@@ -77,25 +76,36 @@ class ZohoFormModal {
                     <iframe 
                         class="modal-iframe"
                         src="about:blank"
-                        loading="lazy">
+                        loading="eager">
                     </iframe>
                 </div>
             </div>
+            <iframe 
+                id="preloadFrame"
+                src="${this.formUrl}"
+                style="position: absolute; width: 0; height: 0; border: 0; visibility: hidden;"
+                loading="eager">
+            </iframe>
         `;
 
         document.body.insertAdjacentHTML('beforeend', modalHTML);
         
-        // Cache DOM elements
         this.modal = document.getElementById('formModal');
         this.iframe = this.modal.querySelector('iframe');
         this.closeButton = this.modal.querySelector('.modal-close');
+        this.preloadFrame = document.getElementById('preloadFrame');
 
-        // Add event listeners
         this.addEventListeners();
     }
 
+    preloadForm() {
+        // The preload frame is already loading the form
+        this.preloadFrame.addEventListener('load', () => {
+            console.log('Form preloaded');
+        });
+    }
+
     addEventListeners() {
-        // Handle waiting list button clicks
         document.querySelectorAll('[href="#join-waiting-list"]').forEach(button => {
             button.addEventListener('click', (e) => {
                 e.preventDefault();
@@ -103,17 +113,10 @@ class ZohoFormModal {
             });
         });
 
-        // Close button
         this.closeButton.addEventListener('click', () => this.closeModal());
-
-        // Close on overlay click
         this.modal.addEventListener('click', (e) => {
-            if (e.target === this.modal) {
-                this.closeModal();
-            }
+            if (e.target === this.modal) this.closeModal();
         });
-
-        // Close on escape key
         document.addEventListener('keydown', (e) => {
             if (e.key === 'Escape' && this.modal.classList.contains('active')) {
                 this.closeModal();
@@ -122,26 +125,25 @@ class ZohoFormModal {
     }
 
     openModal() {
-        // Set iframe source
-        this.iframe.src = this.formUrl;
-        
-        // Show modal
-        document.body.classList.add('modal-open');
-        this.modal.classList.add('active');
+        // Use the preloaded form content
+        if (this.preloadFrame.contentWindow) {
+            this.iframe.src = this.formUrl;
+            document.body.classList.add('modal-open');
+            this.modal.classList.add('active');
+        }
     }
 
     closeModal() {
         this.modal.classList.remove('active');
         document.body.classList.remove('modal-open');
         
-        // Reset iframe
         setTimeout(() => {
             this.iframe.src = 'about:blank';
         }, 200);
     }
 }
 
-// Initialize modal when DOM is loaded
+// Initialize when DOM is ready
 document.addEventListener('DOMContentLoaded', () => {
     window.zohoModal = new ZohoFormModal();
 });

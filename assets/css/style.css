@@ -742,34 +742,42 @@ body {
 /* Enhanced Hero and Media Styles */
 
 /* Logo Styling */
+/* Logo Styling */
 .header {
     width: 100%;
-    padding: 1rem 0;
+    padding: 1rem 0; /* Increased padding for better centering */
     background-color: var(--white);
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
     position: fixed;
     top: 0;
     z-index: 1000;
+    display: flex; /* Added flexbox for centering */
+    justify-content: center; /* Horizontally center the logo */
+    align-items: center; /* Vertically center the logo */
+    text-align: center; /* Ensures text alignment if needed */
 }
 
 .logo-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    display: flex; /* Keeps container flexible */
+    justify-content: center; /* Centers logo horizontally */
+    align-items: center; /* Centers logo vertically */
+    max-width: 100%; /* Prevents content from exceeding bounds */
 }
 
 .logo {
-    height: 90px; /* Increased logo size */
+    height: 10px; /* Logo size */
     width: auto;
-    transition: all 0.3s ease;
+    transition: all 0.3s ease; /* Smooth scaling effect */
+    object-fit: contain; /* Ensures proper scaling */
 }
 
 /* Enhanced Hero Section */
+/* Hero Section */
 .hero {
     position: relative;
-    padding: 10rem 0 6rem;
-    background: linear-gradient(135deg, 
-        rgba(38, 42, 89, 0.03) 0%, 
+    padding: 20rem 0 6rem;
+    background: linear-gradient(135deg,
+        rgba(38, 42, 89, 0.03) 0%,
         rgba(5, 168, 150, 0.07) 100%
     );
     margin-top: 100px; /* Adjusted for larger logo */
@@ -789,20 +797,24 @@ body {
     z-index: 1;
 }
 
+/* Content Layout */
 .hero-content {
     position: relative;
     z-index: 2;
     display: grid;
-    grid-template-columns: 1fr 1fr; /* Equal columns */
-    gap: 3rem;
+    grid-template-columns: 60% 40%; /* Adjusted column ratio */
+    gap: 2rem; /* Reduced gap for tighter alignment */
     align-items: center;
-    max-width: 1400px; /* Increased max-width for better spacing */
+    max-width: 1200px; /* Reduced width for better centering */
     margin: 0 auto;
     padding: 0 2rem;
 }
 
+/* Text Section */
 .hero-text {
-    max-width: 600px; /* Increased text container width */
+    max-width: 700px; /* Increased text container width */
+    text-align: left; /* Ensure text aligns to the left */
+    padding-left: 2rem; /* Added padding to push text further right */
 }
 
 .hero-text h1 {
@@ -819,11 +831,14 @@ body {
     margin-bottom: 2.5rem;
 }
 
-/* Enhanced Video Container */
+/* Enhanced Video Section */
 .hero-video {
     width: 100%;
     max-width: 650px; /* Increased max-width */
     margin: 0 auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .video-wrapper {
@@ -846,7 +861,7 @@ body {
     border-radius: 20px;
 }
 
-/* Enhanced Button Styling */
+/* Button Group */
 .button-group {
     display: flex;
     gap: 1.5rem;
@@ -890,6 +905,10 @@ body {
 
 /* Responsive Design */
 @media (max-width: 1200px) {
+    .hero-content {
+        grid-template-columns: 55% 45%; /* Adjust ratio for medium screens */
+    }
+    
     .hero-text h1 {
         font-size: 3.5rem;
     }
@@ -907,6 +926,7 @@ body {
     
     .hero-text {
         margin: 0 auto;
+        padding-left: 0; /* Reset padding on smaller screens */
     }
     
     .button-group {

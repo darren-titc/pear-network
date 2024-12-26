@@ -1397,3 +1397,100 @@ body.modal-open {
     overflow: hidden;
 }
 
+
+.fee-structure {
+    padding: 4rem 0;
+}
+
+.fee-milestones {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+    margin: 3rem 0;
+}
+
+.fee-card {
+    background: var(--white);
+    border-radius: 16px;
+    padding: 2.5rem;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+    transition: transform 0.3s ease;
+    display: flex;
+    flex-direction: column;
+}
+
+.fee-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
+}
+
+.fee-amount {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: var(--primary);
+    margin-top: auto;
+    position: relative;
+}
+
+.fee-amount::before {
+    content: 'R';
+    font-size: 1rem;
+    position: absolute;
+    top: 0.5rem;
+    left: -1rem;
+}
+
+.total-fee {
+    background: var(--secondary);
+    border-radius: 16px;
+    max-width: 600px;
+    margin: 4rem auto 0;
+    padding: 3rem;
+    text-align: center;
+    color: white;
+    box-shadow: 0 8px 30px rgba(38, 42, 89, 0.15);
+}
+
+.total-fee h3 {
+    color: white;
+    margin-bottom: 1.5rem;
+}
+
+.total-fee-amount {
+    font-size: 3.5rem;
+    font-weight: 700;
+    color: var(--accent);
+    margin: 1.5rem 0;
+}
+
+.total-fee p {
+    color: rgba(255, 255, 255, 0.9);
+    font-size: 1.1rem;
+}
+
+@media (max-width: 1024px) {
+    .fee-milestones {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 768px) {
+    .fee-milestones {
+        grid-template-columns: 1fr;
+        max-width: 400px;
+        margin: 2rem auto;
+    }
+
+    .fee-amount {
+        font-size: 2rem;
+    }
+
+    .total-fee {
+        padding: 2rem;
+        margin: 2rem 1rem;
+    }
+
+    .total-fee-amount {
+        font-size: 2.8rem;
+    }
+}

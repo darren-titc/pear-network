@@ -2,10 +2,10 @@
 document.addEventListener('DOMContentLoaded', () => {
     // Initialize animations for elements
     initializeAnimations();
-    
+
     // Add smooth scrolling for anchor links
     initializeSmoothScroll();
-    
+
     // Initialize intersection observer for scroll animations
     initializeScrollAnimations();
 });
@@ -89,7 +89,7 @@ class ZohoFormModal {
         `;
 
         document.body.insertAdjacentHTML('beforeend', modalHTML);
-        
+
         this.modal = document.getElementById('formModal');
         this.iframe = this.modal.querySelector('iframe');
         this.closeButton = this.modal.querySelector('.modal-close');
@@ -136,7 +136,7 @@ class ZohoFormModal {
     closeModal() {
         this.modal.classList.remove('active');
         document.body.classList.remove('modal-open');
-        
+
         setTimeout(() => {
             this.iframe.src = 'about:blank';
         }, 200);
@@ -148,11 +148,46 @@ document.addEventListener('DOMContentLoaded', () => {
     window.zohoModal = new ZohoFormModal();
 });
 
+// Add the zforms_open_window function for the Beta Program button
+function zforms_open_window(url, height, width) {
+    var leftPos = 0;
+    var topPos = 0;
+    if (screen) {
+        leftPos = (screen.width - width) / 2;
+        topPos = (screen.height - height) / 2;
+        window.open(
+            url,
+            null,
+            'width=' +
+                width +
+                ',height=' +
+                height +
+                ',left=' +
+                leftPos +
+                ',top=' +
+                topPos +
+                ', toolbar=0, location=0, status=1, scrollbars=1, resizable=1'
+        );
+    }
+}
+
+// Add event listener for the Beta Program button
+document.addEventListener('DOMContentLoaded', () => {
+    const betaButton = document.getElementById('beta-program-button');
+    if (betaButton) {
+        betaButton.addEventListener('click', () => {
+            zforms_open_window(
+                'https://forms.zohopublic.com/talentinthecloud/form/CompanyWaitList/formperma/h3YTORD3JfEZAsixG2XZJG1DBPK8LInUOILd1iY_okA',
+                648,
+                700
+            );
+        });
+    }
+});
+
 // Rewards Section Animation
-// Rewards Section Animations
 class RewardsSection {
     constructor() {
-        // Initialize when DOM is ready
         if (document.readyState === 'loading') {
             document.addEventListener('DOMContentLoaded', () => this.init());
         } else {
@@ -161,7 +196,6 @@ class RewardsSection {
     }
 
     init() {
-        // Get elements
         this.progressBar = document.querySelector('.journey-progress');
         this.cards = document.querySelectorAll('.milestone-card');
         this.totalEarnings = document.querySelector('.total-earnings');
@@ -189,23 +223,19 @@ class RewardsSection {
             });
         }, options);
 
-        // Observe milestone cards
         this.cards.forEach((card, index) => {
             observer.observe(card);
             card.setAttribute('data-milestone', index + 1);
         });
 
-        // Observe total earnings
         if (this.totalEarnings) {
             observer.observe(this.totalEarnings);
         }
     }
 
     animateCard(card) {
-        // Add active class to card
         card.classList.add('active');
 
-        // Update progress bar
         if (this.progressBar) {
             const milestone = parseInt(card.getAttribute('data-milestone'));
             const progress = (milestone / this.cards.length) * 100;
@@ -218,7 +248,6 @@ class RewardsSection {
 window.addEventListener('load', () => {
     new RewardsSection();
 });
-
 
 // Hiring Companies Section Animations
 class HiringSection {
@@ -253,10 +282,8 @@ class HiringSection {
             });
         }, options);
 
-        // Observe feature cards
         this.featureCards.forEach(card => observer.observe(card));
 
-        // Observe stats section
         if (this.statsSection) {
             observer.observe(this.statsSection);
         }

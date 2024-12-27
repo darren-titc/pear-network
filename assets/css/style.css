@@ -51,11 +51,10 @@ body {
 }
 
 
-
 /* What is PEAR section */
 .what-is-pear {
     background: linear-gradient(to bottom, #F3F5F8, #ffffff);
-    padding: 6rem 0;
+    padding: 2rem 0;
     position: relative;
     overflow: hidden;
 }
@@ -74,6 +73,7 @@ body {
 .what-is-pear .container {
     position: relative;
     z-index: 2;
+    text-align: center; /* Center the subheading */
 }
 
 .what-is-pear .features-grid {
@@ -357,7 +357,7 @@ body {
 /* Rewards Section Styling */
 .rewards-section {
     background: linear-gradient(160deg, #ffffff 0%, rgba(5, 168, 150, 0.08) 100%);
-    padding: var(--section-padding) 0;
+    padding: 2rem;
     position: relative;
     overflow: hidden;
 }
@@ -899,6 +899,24 @@ body {
     color: var(--white);
     transform: translateY(-3px);
     box-shadow: 0 8px 20px rgba(38, 42, 89, 0.2);
+}
+
+.btn-tertiary {
+    background-color: #FCD91E; /* Example color */
+    text-align: center; /* Centers inline-block elements like the button */
+    margin-top: 2rem; /* Optional spacing above the button */
+    color: #262a59;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    font-size: 1rem;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.btn-tertiary:hover {
+    background-color: #ec971f; /* Darker shade */
 }
 
 /* Responsive Design */
@@ -1492,4 +1510,46 @@ body.modal-open {
     .total-fee-amount {
         font-size: 2.8rem;
     }
+}
+
+
+
+.btn-tertiary {
+    display: inline-block;
+    padding: 1rem 2rem; /* Better padding for a larger button */
+    font-size: 1.2rem; /* Slightly larger text for emphasis */
+    font-weight: 600; /* Bold font for better readability */
+    text-transform: uppercase;
+    text-align: center;
+    color: #ffffff; /* White text for contrast */
+    background: linear-gradient(135deg, #FCD91D 0%, #FCAA15 100%); /* Attractive gradient background */
+    border: none;
+    border-radius: 12px; /* Rounded corners for a modern look */
+    box-shadow: 0 8px 15px rgba(252, 169, 21, 0.3); /* Subtle shadow for depth */
+    transition: all 0.3s ease-in-out; /* Smooth transitions for hover effects */
+    cursor: pointer;
+}
+
+.btn-tertiary:hover {
+    transform: translateY(-3px); /* Lift the button on hover */
+    box-shadow: 0 12px 20px rgba(252, 169, 21, 0.4); /* Enhanced shadow on hover */
+    background: linear-gradient(135deg, #FCAA15 0%, #FCD91D 100%); /* Reverse the gradient for interaction */
+}
+
+.btn-tertiary:active {
+    transform: translateY(0); /* Neutralize the lift effect */
+    box-shadow: 0 6px 12px rgba(252, 169, 21, 0.2); /* Reduced shadow on click */
+}
+
+.btn-tertiary:focus {
+    outline: none;
+    box-shadow: 0 0 0 4px rgba(252, 169, 21, 0.3); /* Focus ring for accessibility */
+}
+
+.beta-program-container {
+    display: flex; /* Enables flexbox */
+    justify-content: center; /* Centers content horizontally */
+    align-items: center; /* Centers content vertically */
+    margin-top: 2rem; /* Optional: Adds spacing above */
+    margin-bottom: 2rem;
 }

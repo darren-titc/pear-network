@@ -304,3 +304,92 @@ class HiringSection {
 
 // Initialize section
 new HiringSection();
+
+
+document.addEventListener('DOMContentLoaded', () => {
+    const referButton = document.getElementById('refer-talent-button');
+    const hireButton = document.getElementById('hire-talent-button');
+
+    if (referButton) {
+        referButton.addEventListener('click', () => {
+            zforms_open_window(
+                'https://forms.zohopublic.com/talentinthecloud/form/ReferrerSignUp/formperma/sample-url',
+                648,
+                700
+            );
+        });
+    }
+
+    if (hireButton) {
+        hireButton.addEventListener('click', () => {
+            zforms_open_window(
+                'https://forms.zohopublic.com/talentinthecloud/form/HiringCompanySignUp/formperma/sample-url',
+                648,
+                700
+            );
+        });
+    }
+});
+
+function zforms_open_window(url, height, width) {
+    const leftPos = (window.screen.width - width) / 2;
+    const topPos = (window.screen.height - height) / 2;
+    window.open(
+        url,
+        null,
+        `width=${width},height=${height},left=${leftPos},top=${topPos},toolbar=0,location=0,status=1,scrollbars=1,resizable=1`
+    );
+}
+
+// Wait for the DOM to load
+document.addEventListener("DOMContentLoaded", () => {
+    // Replace all <i data-feather> elements with Feather icons
+    feather.replace();
+});
+
+
+document.addEventListener("DOMContentLoaded", () => {
+    // Feather icons rendering
+    feather.replace();
+
+    // Intersection Observer for animation
+    const steps = document.querySelectorAll(".reward-step");
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+                entry.target.style.opacity = 1;
+                entry.target.style.transform = "translateY(0)";
+            }
+        });
+    }, { threshold: 0.2 });
+
+    steps.forEach((step) => {
+        step.style.opacity = 0;
+        step.style.transform = "translateY(20px)";
+        observer.observe(step);
+    });
+});
+
+document.addEventListener("DOMContentLoaded", () => {
+    // Feather icons rendering
+    feather.replace();
+
+    // Intersection Observer for animation
+    const steps = document.querySelectorAll(".reward-step");
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+                entry.target.style.opacity = 1;
+                entry.target.style.transform = "translateY(0)";
+            }
+        });
+    }, { threshold: 0.2 });
+
+    steps.forEach((step) => {
+        step.style.opacity = 0;
+        step.style.transform = "translateY(20px)";
+        observer.observe(step);
+    });
+});

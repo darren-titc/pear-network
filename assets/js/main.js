@@ -10,6 +10,18 @@ document.addEventListener('DOMContentLoaded', () => {
     initializeScrollAnimations();
 });
 
+document.addEventListener('DOMContentLoaded', () => {
+    const header = document.querySelector('.header');
+
+    window.addEventListener('scroll', () => {
+        if (window.scrollY > 50) {
+            header.classList.add('scrolled');
+        } else {
+            header.classList.remove('scrolled');
+        }
+    });
+});
+
 function initializeAnimations() {
     // Add animation classes to elements when they become visible
     const animatedElements = document.querySelectorAll('.card, .btn, h1, h2, .hero-video');

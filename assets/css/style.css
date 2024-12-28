@@ -740,34 +740,44 @@ body {
 }
 /* Enhanced Hero and Media Styles */
 
-/* Logo Styling */
-/* Logo Styling */
 .header {
     width: 100%;
-    padding: 1rem 0; /* Increased padding for better centering */
-    background-color: var(--white);
+    padding: 1rem 0;
+    background-color: rgba(255, 255, 255, 0.8); /* Semi-transparent default */
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
     position: fixed;
     top: 0;
     z-index: 1000;
-    display: flex; /* Added flexbox for centering */
-    justify-content: center; /* Horizontally center the logo */
-    align-items: center; /* Vertically center the logo */
-    text-align: center; /* Ensures text alignment if needed */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    backdrop-filter: blur(10px); /* Adds a subtle blur for elegance */
+    transition: all 0.3s ease; /* Smooth transitions */
+}
+
+.header.scrolled {
+    padding: 0.5rem 0; /* Reduce padding when scrolled */
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* Slightly deeper shadow on scroll */
+    background-color: rgba(255, 255, 255, 0.9); /* Maintain transparency on scroll */
+    backdrop-filter: blur(8px); /* Slightly more blur for focus */
 }
 
 .logo-container {
-    display: flex; /* Keeps container flexible */
-    justify-content: center; /* Centers logo horizontally */
-    align-items: center; /* Centers logo vertically */
-    max-width: 100%; /* Prevents content from exceeding bounds */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    max-width: 100%;
 }
 
 .logo {
-    height: 10px; /* Logo size */
-    width: auto;
+    height: 60px; /* Default logo size */
     transition: all 0.3s ease; /* Smooth scaling effect */
-    object-fit: contain; /* Ensures proper scaling */
+}
+
+.header.scrolled .logo {
+    height: 40px; /* Smaller logo size on scroll */
+    opacity: 0.8; /* Slightly faded for a subtle effect */
 }
 
 /* Enhanced Hero Section */
@@ -1132,92 +1142,34 @@ p {
 }
 
 /* Footer */
-/* Modern Footer Styles */
 .footer {
-    background: #F8FAFC;
-    padding: 5rem 0 3rem;
-    border-top: 1px solid rgba(0, 0, 0, 0.1);
+    padding: 4rem 0; /* Consistent spacing */
+    border-top: 2px solid rgba(0, 0, 0, 0.08); /* Subtle border for separation */
+    text-align: center;
 }
 
 .footer-grid {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 3rem;
-    margin-bottom: 3rem;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Responsive grid */
+    gap: 2rem; /* Spacing between columns */
+    max-width: var(--page-width); /* Ensure content is contained within the page width */
+    margin: 0 auto; /* Center grid content */
+    padding: 0 2rem; /* Add padding for smaller screens */
 }
 
-.footer-column {
-    display: flex;
-    flex-direction: column;
-}
-
-/* Logo Column */
-/* Footer with refined logo styling */
-.footer {
-    background-color: #F8FAFC;
-    padding: 4rem 0;
-    border-top: 1px solid rgba(0, 0, 0, 0.08);
-}
-
-.footer-content {
-    max-width: var(--page-width);
-    margin: 0 auto;
-    padding: 0 2rem;
-}
-
-/* Top Section with Logo */
-.footer-brand {
-    display: flex;
-    align-items: center;
-    padding-bottom: 2.5rem;
-    margin-bottom: 2.5rem;
-    border-bottom: 1px solid rgba(0, 0, 0, 0.08);
-}
-
-.logo-container {
-    width: 120px; /* Fixed width for logo */
-    margin-right: 2rem;
-}
-
-.logo-container img {
-    width: 100%;
-    height: auto;
-}
-
-.brand-motto {
-    color: var(--text-secondary);
-    font-size: 1.1rem;
-    margin: 0;
-}
-
-/* Main Footer Grid */
-/* Centered Footer Styles */
-.footer {
-    background-color: #F8FAFC;
-    padding: 4rem 0;
-    border-top: 1px solid rgba(0, 0, 0, 0.08);
-    text-align: center;
-}
-
-.footer-content {
-    max-width: var(--page-width);
-    margin: 0 auto;
-    padding: 0 2rem;
-}
-
-/* Top Section with Logo */
+/* Footer Branding */
 .footer-brand {
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding-bottom: 2.5rem;
-    margin-bottom: 2.5rem;
+    padding-bottom: 2rem;
+    margin-bottom: 2rem;
     border-bottom: 1px solid rgba(0, 0, 0, 0.08);
 }
 
 .logo-container {
     width: 120px;
-    margin-bottom: 1.5rem;
+    margin-bottom: 1rem;
 }
 
 .logo-container img {
@@ -1232,15 +1184,9 @@ p {
     max-width: 500px;
 }
 
-/* Main Footer Grid */
-.footer-grid {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 2rem;
-}
-
+/* Footer Content Columns */
 .footer-about {
+    text-align: left;
     max-width: 600px;
 }
 
@@ -1275,6 +1221,19 @@ p {
     width: 18px;
     height: 18px;
     margin-right: 0.75rem;
+}
+
+/* Full-Width Section Styling */
+.footer-container {
+    width: 100%; /* Full width for the container */
+    background-color: #F8FAFC;
+    padding: 2rem 0;
+}
+
+.footer-container .footer-content {
+    max-width: var(--page-width); /* Contain within the page width */
+    margin: 0 auto;
+    padding: 0 2rem;
 }
 
 /* Powered By Section */
@@ -1513,38 +1472,39 @@ body.modal-open {
 }
 
 
-
 .btn-tertiary {
     display: inline-block;
-    padding: 1rem 2rem; /* Better padding for a larger button */
-    font-size: 1.2rem; /* Slightly larger text for emphasis */
-    font-weight: 600; /* Bold font for better readability */
+    padding: 1rem 2rem; /* Balanced padding for a medium-sized button */
+    font-size: 1.1rem; /* Proportional font size for emphasis */
+    font-weight: 600; /* Bold text for better readability */
     text-transform: uppercase;
     text-align: center;
     color: #ffffff; /* White text for contrast */
-    background: linear-gradient(135deg, #FCD91D 0%, #FCAA15 100%); /* Attractive gradient background */
-    border: none;
-    border-radius: 12px; /* Rounded corners for a modern look */
-    box-shadow: 0 8px 15px rgba(252, 169, 21, 0.3); /* Subtle shadow for depth */
-    transition: all 0.3s ease-in-out; /* Smooth transitions for hover effects */
+    background: linear-gradient(135deg, #262a59 0%, #404478 100%); /* Subtle gradient using primary color */
+    border: none; /* Clean borderless look */
+    border-radius: 8px; /* Slightly rounded corners for modern appeal */
+    box-shadow: 0 4px 10px rgba(38, 42, 89, 0.3); /* Soft shadow for depth */
+    transition: all 0.3s ease; /* Smooth transition for hover effects */
     cursor: pointer;
 }
 
 .btn-tertiary:hover {
-    transform: translateY(-3px); /* Lift the button on hover */
-    box-shadow: 0 12px 20px rgba(252, 169, 21, 0.4); /* Enhanced shadow on hover */
-    background: linear-gradient(135deg, #FCAA15 0%, #FCD91D 100%); /* Reverse the gradient for interaction */
+    transform: translateY(-2px); /* Slight lift on hover */
+    box-shadow: 0 6px 14px rgba(38, 42, 89, 0.4); /* Enhanced shadow for hover */
+    background: linear-gradient(135deg, #404478 0%, #262a59 100%); /* Reverse gradient for interaction */
 }
 
 .btn-tertiary:active {
-    transform: translateY(0); /* Neutralize the lift effect */
-    box-shadow: 0 6px 12px rgba(252, 169, 21, 0.2); /* Reduced shadow on click */
+    transform: translateY(0); /* Reset lift effect */
+    box-shadow: 0 3px 8px rgba(38, 42, 89, 0.2); /* Reduced shadow on click */
+    background: #262a59; /* Solid color for active state */
 }
 
 .btn-tertiary:focus {
     outline: none;
-    box-shadow: 0 0 0 4px rgba(252, 169, 21, 0.3); /* Focus ring for accessibility */
+    box-shadow: 0 0 0 4px rgba(38, 42, 89, 0.3); /* Focus ring for accessibility */
 }
+
 
 .beta-program-container {
     display: flex; /* Enables flexbox */

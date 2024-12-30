@@ -1639,6 +1639,12 @@ h3 {
                 0 6px 12px rgba(0, 123, 255, 0.5); /* Deep shadow */
 }
 
+@media (max-width: 768px) {
+    .hero-video-wrapper {
+        display: none;
+    }
+}
+
 /* Glow Effect */
 .hero-video-wrapper::before {
     content: '';

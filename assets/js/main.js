@@ -73,16 +73,19 @@ window.addEventListener('scroll', () => {
     }
 });
 
+// Class to Handle Modal Logic
 class ZohoFormModal {
-    constructor() {
-        this.formUrl = 'https://forms.zohopublic.com/talentinthecloud/form/PearWaitingList/formperma/xtmool5P4DRilibwvSXq6OMwLis9gIk1V9uOSW-QInI';
+    constructor(formUrl, triggerSelector, modalId) {
+        this.formUrl = formUrl;
+        this.triggerSelector = triggerSelector;
+        this.modalId = modalId;
         this.initialize();
         this.preloadForm();
     }
 
     initialize() {
         const modalHTML = `
-            <div class="modal-overlay" id="formModal">
+            <div class="modal-overlay" id="${this.modalId}">
                 <div class="modal-container">
                     <button class="modal-close">×</button>
                     <iframe 
@@ -93,7 +96,7 @@ class ZohoFormModal {
                 </div>
             </div>
             <iframe 
-                id="preloadFrame"
+                id="preloadFrame-${this.modalId}"
                 src="${this.formUrl}"
                 style="position: absolute; width: 0; height: 0; border: 0; visibility: hidden;"
                 loading="eager">
@@ -102,10 +105,10 @@ class ZohoFormModal {
 
         document.body.insertAdjacentHTML('beforeend', modalHTML);
 
-        this.modal = document.getElementById('formModal');
+        this.modal = document.getElementById(this.modalId);
         this.iframe = this.modal.querySelector('iframe');
         this.closeButton = this.modal.querySelector('.modal-close');
-        this.preloadFrame = document.getElementById('preloadFrame');
+        this.preloadFrame = document.getElementById(`preloadFrame-${this.modalId}`);
 
         this.addEventListeners();
     }
@@ -113,12 +116,12 @@ class ZohoFormModal {
     preloadForm() {
         // The preload frame is already loading the form
         this.preloadFrame.addEventListener('load', () => {
-            console.log('Form preloaded');
+            console.log(`Form preloaded for modal ${this.modalId}`);
         });
     }
 
     addEventListeners() {
-        document.querySelectorAll('[href="#join-waiting-list"]').forEach(button => {
+        document.querySelectorAll(this.triggerSelector).forEach(button => {
             button.addEventListener('click', (e) => {
                 e.preventDefault();
                 this.openModal();
@@ -155,46 +158,21 @@ class ZohoFormModal {
     }
 }
 
-// Initialize when DOM is ready
+// Initialize modals for both primary and secondary buttons
 document.addEventListener('DOMContentLoaded', () => {
-    window.zohoModal = new ZohoFormModal();
-});
+    // Modal for the primary button
+    new ZohoFormModal(
+        'https://forms.zohopublic.com/talentinthecloud/form/PearWaitingList/formperma/xtmool5P4DRilibwvSXq6OMwLis9gIk1V9uOSW-QInI',
+        '.btn-primary',
+        'formModal-primary'
+    );
 
-// Add the zforms_open_window function for the Beta Program button
-function zforms_open_window(url, height, width) {
-    var leftPos = 0;
-    var topPos = 0;
-    if (screen) {
-        leftPos = (screen.width - width) / 2;
-        topPos = (screen.height - height) / 2;
-        window.open(
-            url,
-            null,
-            'width=' +
-                width +
-                ',height=' +
-                height +
-                ',left=' +
-                leftPos +
-                ',top=' +
-                topPos +
-                ', toolbar=0, location=0, status=1, scrollbars=1, resizable=1'
-        );
-    }
-}
-
-// Add event listener for the Beta Program button
-document.addEventListener('DOMContentLoaded', () => {
-    const betaButton = document.getElementById('beta-program-button');
-    if (betaButton) {
-        betaButton.addEventListener('click', () => {
-            zforms_open_window(
-                'https://forms.zohopublic.com/talentinthecloud/form/CompanyWaitList/formperma/h3YTORD3JfEZAsixG2XZJG1DBPK8LInUOILd1iY_okA',
-                648,
-                700
-            );
-        });
-    }
+    // Modal for the secondary button
+    new ZohoFormModal(
+        'https://forms.zohopublic.com/talentinthecloud/form/CompanyWaitList/formperma/h3YTORD3JfEZAsixG2XZJG1DBPK8LInUOILd1iY_okA',
+        '.btn-secondary',
+        'formModal-secondary'
+    );
 });
 
 // Rewards Section Animation
@@ -305,91 +283,7 @@ class HiringSection {
 // Initialize section
 new HiringSection();
 
-
+// Feather icons rendering
 document.addEventListener('DOMContentLoaded', () => {
-    const referButton = document.getElementById('refer-talent-button');
-    const hireButton = document.getElementById('hire-talent-button');
-
-    if (referButton) {
-        referButton.addEventListener('click', () => {
-            zforms_open_window(
-                'https://forms.zohopublic.com/talentinthecloud/form/ReferrerSignUp/formperma/sample-url',
-                648,
-                700
-            );
-        });
-    }
-
-    if (hireButton) {
-        hireButton.addEventListener('click', () => {
-            zforms_open_window(
-                'https://forms.zohopublic.com/talentinthecloud/form/HiringCompanySignUp/formperma/sample-url',
-                648,
-                700
-            );
-        });
-    }
-});
-
-function zforms_open_window(url, height, width) {
-    const leftPos = (window.screen.width - width) / 2;
-    const topPos = (window.screen.height - height) / 2;
-    window.open(
-        url,
-        null,
-        `width=${width},height=${height},left=${leftPos},top=${topPos},toolbar=0,location=0,status=1,scrollbars=1,resizable=1`
-    );
-}
-
-// Wait for the DOM to load
-document.addEventListener("DOMContentLoaded", () => {
-    // Replace all <i data-feather> elements with Feather icons
     feather.replace();
-});
-
-
-document.addEventListener("DOMContentLoaded", () => {
-    // Feather icons rendering
-    feather.replace();
-
-    // Intersection Observer for animation
-    const steps = document.querySelectorAll(".reward-step");
-
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach((entry) => {
-            if (entry.isIntersecting) {
-                entry.target.style.opacity = 1;
-                entry.target.style.transform = "translateY(0)";
-            }
-        });
-    }, { threshold: 0.2 });
-
-    steps.forEach((step) => {
-        step.style.opacity = 0;
-        step.style.transform = "translateY(20px)";
-        observer.observe(step);
-    });
-});
-
-document.addEventListener("DOMContentLoaded", () => {
-    // Feather icons rendering
-    feather.replace();
-
-    // Intersection Observer for animation
-    const steps = document.querySelectorAll(".reward-step");
-
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach((entry) => {
-            if (entry.isIntersecting) {
-                entry.target.style.opacity = 1;
-                entry.target.style.transform = "translateY(0)";
-            }
-        });
-    }, { threshold: 0.2 });
-
-    steps.forEach((step) => {
-        step.style.opacity = 0;
-        step.style.transform = "translateY(20px)";
-        observer.observe(step);
-    });
 });
